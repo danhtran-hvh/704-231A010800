@@ -1,0 +1,261 @@
+/* Bài 1 */
+.carousel-container {
+    width: 80%; 
+    max-width: 800px;
+    margin: auto;
+    overflow: hidden; 
+    position: relative;
+    border: 5px solid #ddd;
+}
+
+.carousel-slide {
+    display: flex; 
+    width: 100%;
+    transition: transform 0.5s ease-in-out; 
+}
+
+.carousel-slide img {
+    width: 100%; 
+    height: auto;
+}
+#prevBtn, #nextBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+#nextBtn { right: 0; }
+
+
+/* --- Style cho Bài 2 --- */
+.todo-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#addBtn {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Bài 2*/
+.todo-grid {
+    display: grid;
+    grid-template-columns: 1fr auto auto; 
+    gap: 10px;
+    align-items: center;
+}
+
+.todo-text {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    border-left: 4px solid #007bff;
+}
+
+.btn-edit {
+    background-color: #ffc107;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+/* Bài 3 */
+.game-container {
+    max-width: 500px;
+    margin: 50px auto;
+    text-align: center;
+    padding: 30px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+#message {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 15px 0;
+    color: #007bff;
+}
+.firework {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    box-shadow: 0 0 #fff, 0 0 #fff, 0 0 #fff;
+    animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+    0% { transform: scale(1); opacity: 1; }
+    100% { 
+        transform: scale(20); 
+        opacity: 0;
+        box-shadow: 20px 20px #ff0000, -20px -20px #b7bbb7, 20px -20px #0000ff, -20px 20px #ffff00;
+    }
+}
+
+
+/* about.html*/
+.about-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+.profile-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display: flex;
+    gap: 30px;
+    max-width: 800px;
+    width: 100%;
+    align-items: center;
+}
+
+.profile-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%; 
+    object-fit: cover;
+    border: 5px solid #007bff;
+}
+
+.profile-info h1 {
+    margin-top: 0;
+    color: #333;
+}
+
+.bio {
+    margin-top: 20px;
+    font-style: italic;
+    color: #666;
+    line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+    .profile-card {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+.navbar {
+    background: #333;
+    padding: 15px;
+    text-align: center;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+.navbar a.active {
+    color: #007bff;
+}
+
+/*Contact.html*/
+.contact-container {
+    display: flex;
+    justify-content: center;
+    padding: 50px 20px;
+}
+
+.contact-box {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    max-width: 500px;
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; 
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+
+.social-links {
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    font-size: 0.9rem;
+    color: #666;
+}
