@@ -1,148 +1,84 @@
-document.addEventListener('DOMContentLoaded', () => {
+// Trong file js/script.js
+const slide = document.querySelector('.carousel-slide');
+const images = document.querySelectorAll('.carousel-slide img');
+const prevBtn = document.querySelector('#prevBtn');
+const nextBtn = document.querySelector('#nextBtn');
 
+let counter = 0;
+const size = images[0].clientWidth; // Lấy chiều rộng của 1 tấm ảnh
 
-    
-    // BÀI 1:
-    const slide = document.querySelector('.carousel-slide');
-    const images = document.querySelectorAll('.carousel-slide img');
-    const prevBtn = document.querySelector('#prevBtn');
-    const nextBtn = document.querySelector('#nextBtn');
-
-    if (slide && images.length > 0) {
-        let counter = 0;
-        const size = images[0].clientWidth;
-
-        const moveSlide = () => {
-            slide.style.transform = `translateX(${-size * counter}px)`;
-        };
-
-        if (nextBtn) {
-            nextBtn.onclick = () => {
-                counter = (counter >= images.length - 1) ? 0 : counter + 1;
-                moveSlide();
-            };
-        }
-
-        if (prevBtn) {
-            prevBtn.onclick = () => {
-                counter = (counter <= 0) ? images.length - 1 : counter - 1;
-                moveSlide();
-            };
-        }
-        setInterval(() => {
-            if (nextBtn) nextBtn.click();
-        }, 3000);
-    }
-
-
-    // BÀI 2
-    const todoInput = document.getElementById('todoInput');
-    const addBtn = document.getElementById('addBtn');
-    const todoList = document.getElementById('todoList');
-
-    if (todoInput && addBtn && todoList) {
-        let tasks = JSON.parse(localStorage.getItem('myTasks')) || [];
-
-        const renderTasks = () => {
-            todoList.innerHTML = "";
-            tasks.forEach((task, index) => {
-                todoList.innerHTML += `
-                    <div class="todo-text">${task}</div>
-                    <button class="btn-edit" onclick="editTask(${index})">Sửa</button>
-                    <button class="btn-delete" onclick="deleteTask(${index})">Xóa</button>
-                `;
-            });
-        };
-
-        const saveAndRender = () => {
-            localStorage.setItem('myTasks', JSON.stringify(tasks));
-            renderTasks();
-        };
-
-        addBtn.onclick = () => {
-            const val = todoInput.value.trim();
-            if (val !== "") {
-                tasks.push(val);
-                todoInput.value = "";
-                saveAndRender();
-            }
-        };
-
-        window.deleteTask = (index) => {
-            tasks.splice(index, 1);
-            saveAndRender();
-        };
-
-        window.editTask = (index) => {
-            const newVal = prompt("Sửa công việc:", tasks[index]);
-            if (newVal !== null && newVal.trim() !== "") {
-                tasks[index] = newVal.trim();
-                saveAndRender();
-            }
-        };
-
-        renderTasks();
-    }
-
-
-
-    //BÀI 3
-const guessInput = document.getElementById('guessInput');
-const checkBtn = document.getElementById('checkBtn');
-const message = document.getElementById('message');
-const attemptsDisplay = document.getElementById('attempts');
-const resetBtn = document.getElementById('resetBtn');
-const fireworksContainer = document.getElementById('fireworks-container');
-
-if (guessInput && checkBtn) {
-    let randomNumber = Math.floor(Math.random() * 100) + 1;
-    let attempts = 0;
-
-    const createFirework = () => {
-        for (let i = 0; i < 5; i++) {
-            const fw = document.createElement('div');
-            fw.className = 'firework';
-            fw.style.left = Math.random() * 100 + "%";
-            fw.style.top = Math.random() * 100 + "%";
-            fireworksContainer.appendChild(fw);
-            setTimeout(() => fw.remove(), 1000);
-        }
-    };
-
-    checkBtn.onclick = () => {
-        const userGuess = parseInt(guessInput.value);
-        if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
-            message.innerText = "Hãy nhập số từ 1 đến 100!";
-            return;
-        }
-
-        attempts++;
-        attemptsDisplay.innerText = attempts;
-
-        if (userGuess === randomNumber) {
-            message.innerHTML = "🎉 CHÚC MỪNG! Bạn đã đoán đúng!";
-            message.style.color = "green";
-            checkBtn.disabled = true;
-            resetBtn.style.display = "inline-block";
-            let interval = setInterval(createFirework, 300);
-            setTimeout(() => clearInterval(interval), 3000);
-        } else if (userGuess < randomNumber) {
-            message.innerText = "Quá thấp! Thử lại xem.";
-            message.style.color = "orange";
-        } else {
-            message.innerText = "Quá cao! Hạ nhiệt chút nào.";
-            message.style.color = "red";
-        }
-    };
-
-    resetBtn.onclick = () => {
-        randomNumber = Math.floor(Math.random() * 100) + 1;
-        attempts = 0;
-        attemptsDisplay.innerText = "0";
-        message.innerText = "";
-        guessInput.value = "";
-        checkBtn.disabled = false;
-        resetBtn.style.display = "none";
-    };
+// Hàm chuyển ảnh
+function moveSlide() {
+    slide.style.transform = 'translateX(' + (-size * counter) + 'px)';
 }
+
+// Xử lý nút Next
+nextBtn.addEventListener('click', () => {
+    if (counter >= images.length - 1) counter = -1; // Quay lại ảnh đầu
+    counter++;
+    moveSlide();
 });
+
+// Xử lý nút Prev
+prevBtn.addEventListener('click', () => {
+    if (counter <= 0) counter = images.length;
+    counter--;
+    moveSlide();
+});
+
+// Tự động chạy sau 3 giây
+setInterval(() => {
+    nextBtn.click();
+}, 3000);
+// Quản lý To-Do List
+const todoInput = document.getElementById('todoInput');
+const todoList = document.getElementById('todoList');
+
+// 1. Tải dữ liệu từ LocalStorage khi trang web mở lên
+let tasks = JSON.parse(localStorage.getItem('myTasks')) || [];
+renderTasks();
+
+// 2. Hàm thêm công việc
+function addTask() {
+    const text = todoInput.value.trim();
+    if (text === "") return;
+
+    tasks.push(text);
+    todoInput.value = "";
+    saveAndRender();
+}
+
+// 3. Hàm xóa công việc
+function deleteTask(index) {
+    tasks.splice(index, 1);
+    saveAndRender();
+}
+
+// 4. Hàm sửa công việc
+function editTask(index) {
+    const newText = prompt("Chỉnh sửa công việc:", tasks[index]);
+    if (newText !== null && newText.trim() !== "") {
+        tasks[index] = newText.trim();
+        saveAndRender();
+    }
+}
+
+// 5. Lưu vào LocalStorage và cập nhật giao diện
+function saveAndRender() {
+    localStorage.setItem('myTasks', JSON.stringify(tasks));
+    renderTasks();
+}
+
+// 6. Hiển thị danh sách ra màn hình
+function renderTasks() {
+    todoList.innerHTML = "";
+    tasks.forEach((task, index) => {
+        todoList.innerHTML += `
+            <div class="todo-item">
+                <span class="todo-text">${task}</span>
+                <button onclick="editTask(${index})" style="background-color: #ffc107;">Sửa</button>
+                <button onclick="deleteTask(${index})" style="background-color: #dc3545; color: white;">Xóa</button>
+            </div>
+        `;
+    });
+}
