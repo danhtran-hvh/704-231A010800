@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // ==========================================
-    // KHU VỰC BÀI 1: CAROUSEL (Mã bạn đã viết trước đó)
-    // ==========================================
+    //BÀI 1: CAROUSEL
     const slide = document.querySelector('.carousel-slide');
     const images = document.querySelectorAll('.carousel-slide img');
     const prevBtn = document.querySelector('#prevBtn');
@@ -29,17 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 moveSlide();
             };
         }
-
-        // Tự động chạy sau 3 giây
         setInterval(() => {
             if (nextBtn) nextBtn.click();
         }, 3000);
     }
-
-
-    // ==========================================
-    // KHU VỰC BÀI 2: TO-DO LIST (Mã mình vừa gửi)
-    // ==========================================
+    //BÀI 2: TO-DO LIST 
     const todoInput = document.getElementById('todoInput');
     const addBtn = document.getElementById('addBtn');
     const todoList = document.getElementById('todoList');
@@ -57,12 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
             });
         };
-
         const saveAndRender = () => {
             localStorage.setItem('myTasks', JSON.stringify(tasks));
             renderTasks();
         };
-
         addBtn.onclick = () => {
             const val = todoInput.value.trim();
             if (val !== "") {
@@ -71,12 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 saveAndRender();
             }
         };
-
         window.deleteTask = (index) => {
             tasks.splice(index, 1);
             saveAndRender();
         };
-
         window.editTask = (index) => {
             const newVal = prompt("Sửa công việc:", tasks[index]);
             if (newVal !== null && newVal.trim() !== "") {
@@ -88,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTasks();
     }
 });
-// --- PHẦN BÀI 3: GAME ĐOÁN SỐ ---
+//BÀI 3: GAME ĐOÁN SỐ
 const guessInput = document.getElementById('guessInput');
 const checkBtn = document.getElementById('checkBtn');
 const message = document.getElementById('message');
@@ -126,7 +114,6 @@ if (guessInput && checkBtn) {
             message.style.color = "green";
             checkBtn.disabled = true;
             resetBtn.style.display = "inline-block";
-            // Kích hoạt pháo hoa
             let interval = setInterval(createFirework, 300);
             setTimeout(() => clearInterval(interval), 3000);
         } else if (userGuess < randomNumber) {
@@ -137,7 +124,6 @@ if (guessInput && checkBtn) {
             message.style.color = "red";
         }
     };
-
     resetBtn.onclick = () => {
         randomNumber = Math.floor(Math.random() * 100) + 1;
         attempts = 0;
