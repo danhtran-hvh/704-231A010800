@@ -31,14 +31,15 @@
     cursor: pointer;
 }
 #nextBtn { right: 0; }
-/* CSS cho Bài 2 */
+/* Style tổng quát cho Bài 2 */
 .todo-container {
-    max-width: 500px;
+    max-width: 600px;
     margin: 50px auto;
     padding: 20px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    font-family: sans-serif;
 }
 
 .input-group {
@@ -49,28 +50,137 @@
 
 .input-group input {
     flex: 1;
-    padding: 10px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
-/* Sử dụng CSS Grid cho danh sách */
+#addBtn {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* YÊU CẦU CHÍNH: SỬ DỤNG CSS GRID */
 .todo-grid {
     display: grid;
-    grid-template-columns: 1fr auto auto; /* Cột 1 rộng nhất, 2 cột nút bấm vừa đủ dùng */
+    grid-template-columns: 1fr auto auto; /* Cột 1 rộng, 2 cột nút hẹp */
     gap: 10px;
     align-items: center;
 }
 
-.todo-item {
-    display: contents; /* Giúp các con của todo-item tuân theo grid cha */
-}
-
 .todo-text {
-    background: white;
+    background: #f8f9fa;
     padding: 10px;
-    border-radius: 4px;
+    border-radius: 5px;
 }
 
-button {
-    padding: 8px 15px;
-    cursor: pointer;
+.btn-edit { background: #ffc107; border: none; padding: 8px; border-radius: 4px; cursor: pointer; }
+.btn-delete { background: #dc3545; color: white; border: none; padding: 8px; border-radius: 4px; cursor: pointer; }
+/* Style cho Bài 3 */
+.game-container {
+    max-width: 500px;
+    margin: 50px auto;
+    text-align: center;
+    padding: 30px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+#message {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 15px 0;
+    color: #007bff;
+}
+
+/* Hiệu ứng pháo hoa đơn giản bằng CSS */
+.firework {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    box-shadow: 0 0 #fff, 0 0 #fff, 0 0 #fff; /* Tạo các tia sáng */
+    animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+    0% { transform: scale(1); opacity: 1; }
+    100% { 
+        transform: scale(20); 
+        opacity: 0;
+        box-shadow: 20px 20px #ff0000, -20px -20px #00ff00, 20px -20px #0000ff, -20px 20px #ffff00;
+    }
+}
+/* --- Style cho trang About --- */
+.about-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+.profile-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display: flex;
+    gap: 30px;
+    max-width: 800px;
+    width: 100%;
+    align-items: center;
+}
+
+.profile-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%; /* Làm ảnh hình tròn */
+    object-fit: cover;
+    border: 5px solid #007bff;
+}
+
+.profile-info h1 {
+    margin-top: 0;
+    color: #333;
+}
+
+.bio {
+    margin-top: 20px;
+    font-style: italic;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Responsive cho điện thoại */
+@media (max-width: 600px) {
+    .profile-card {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Style cho Navbar chung */
+.navbar {
+    background: #333;
+    padding: 15px;
+    text-align: center;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+.navbar a.active {
+    color: #007bff;
 }

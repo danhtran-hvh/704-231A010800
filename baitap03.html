@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập 3 - Game Đoán Số</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Hãy đoán 01 số từ 01-100</h1>
+        <p>Bạn có đoán được đó là số mấy không?</p>
+        
+        <div class="input-group">
+            <input type="number" id="guessInput" placeholder="Nhập số..." min="1" max="100">
+            <button id="checkBtn">Đoán!</button>
+        </div>
+
+        <p id="message"></p>
+        <p>Số lần thử: <span id="attempts">0</span></p>
+        <button id="resetBtn" style="display:none;">Chơi lại</button>
+
+        <div id="fireworks-container"></div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
